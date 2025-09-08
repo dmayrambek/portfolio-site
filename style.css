@@ -4,13 +4,25 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #1E1F26, #283655, #4D648D); /* blueberry */
   background-attachment: fixed;
-  color: #D0E1F9; /* light violet-blue text */
+  color: #D0E1F9; /* светлый голубовато-серый */
 }
 
 /* HEADERS */
 h1, h2 {
   color: #D0E1F9;
-  text-shadow: none; /* no glow */
+  text-shadow: none;
+}
+
+/* === LINKS === */
+a {
+  color: #4da6ff; /* мягкий голубой */
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+a:hover {
+  color: #ffffff; /* белый при наведении */
+  text-shadow: 0 0 6px rgba(77, 166, 255, 0.7);
 }
 
 /* === HEADER === */
@@ -19,20 +31,12 @@ header {
   color: #D0E1F9;
   padding: 20px;
   text-align: center;
-  box-shadow: none; /* no shadow */
+  box-shadow: none;
 }
 
 header nav a {
   margin: 0 15px;
-  color: #D0E1F9;
-  text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
-}
-
-header nav a:hover {
-  color: #fff;
-  text-shadow: none; /* no glow */
 }
 
 /* === MAIN CONTENT === */
@@ -45,14 +49,8 @@ section {
   background: rgba(40, 54, 85, 0.7); /* ink indigo */
   padding: 20px;
   border-radius: 12px;
-  box-shadow: none; /* no glow */
+  box-shadow: none;
   color: #D0E1F9;
-  transition: none; /* no animation */
-}
-
-section:hover {
-  transform: none;   /* no movement */
-  box-shadow: none;  /* no glow */
 }
 
 /* === FOOTER === */
