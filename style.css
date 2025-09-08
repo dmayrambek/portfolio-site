@@ -2,10 +2,33 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1E1F26, #283655, #4D648D); /* blueberry */
+  background: linear-gradient(135deg, #1E1F26, #283655, #4D648D); /* основной градиент */
   background-attachment: fixed;
   color: #D0E1F9;
   line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Дополнительный технологический узор */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url("https://www.transparenttextures.com/patterns/cubes.png"); /* сетка кубов */
+  opacity: 0.07; /* мягкий прозрачный эффект */
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at top right, rgba(77,166,255,0.15), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(200,100,255,0.12), transparent 70%);
+  z-index: -1;
 }
 
 /* HEADERS */
@@ -150,3 +173,4 @@ footer {
   font-size: 14px;
   letter-spacing: 1px;
 }
+
