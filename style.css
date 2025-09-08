@@ -10,28 +10,40 @@ body {
   overflow-x: hidden;
 }
 
-/* Дополнительный технологический слой */
+/* --- Технологический узор (сеточка) --- */
 body::before {
   content: "";
   position: fixed;
-  inset: 0; /* сокращение top/left/right/bottom */
+  inset: 0;
   background: url("https://www.transparenttextures.com/patterns/cubes.png") center/cover repeat;
-  opacity: 0.06; /* очень мягкий, чтобы не мешал глазам */
-  z-index: -2;
+  opacity: 0.05; /* очень мягкий */
+  z-index: -3;
 }
 
-/* Подсветка по углам */
+/* --- Подсветки + плавающее движение --- */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at top right, rgba(77,166,255,0.15), transparent 70%),
-    radial-gradient(circle at bottom left, rgba(200,100,255,0.12), transparent 70%);
-  z-index: -1;
+    radial-gradient(circle at 20% 30%, rgba(77,166,255,0.18), transparent 70%),
+    radial-gradient(circle at 80% 70%, rgba(200,100,255,0.15), transparent 75%);
+  background-size: 200% 200%;
+  animation: floatBackground 18s ease-in-out infinite alternate;
+  z-index: -2;
 }
 
-/* HEADERS */
+/* --- Анимация движения подсветки --- */
+@keyframes floatBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* === HEADERS === */
 h1, h2, h3 {
   color: #D0E1F9;
   margin-bottom: 12px;
