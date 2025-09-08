@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Cases - Automation Portfolio</title>
+  <title>Кейсы - Портфолио Automation</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <header>
-    <h1>Cases</h1>
+    <h1>Кейсы</h1>
     <nav>
-      <a href="../index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="about.html">About Me</a>
+      <a href="../index.html">Главная</a>
+      <a href="projects.html">Проекты</a>
+      <a href="about.html">Обо мне</a>
     </nav>
   </header>
 
@@ -19,89 +19,115 @@
     <!-- Backoffice Requests -->
     <section>
       <h2>Backoffice Requests</h2>
+      <p><b>Что было:</b> обработка заявок выполнялась вручную, ошибки в реквизитах и адресах, дублирование информации.</p>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>QR / POS Requests</li>
-        <li>E-Com Requests</li>
-        <li>Contract Termination</li>
-        <li>Tariff / Commission Change</li>
-        <li>Change of Requisites</li>
-        <li>Change of POS Address</li>
-        <li>Change of POS Schedule</li>
-        <li>POS Terminal Diagnostics</li>
-        <li>POS Terminal Withdrawal</li>
-        <li>Other Requests</li>
+        <li>Разработал и внедрил <b>workflow</b> для всех типов заявок (QR/POS, E-Com, расторжение договоров, тарифы, реквизиты и др.).</li>
+        <li>Настроил <b>динамические формы</b> (Extension for Jira Service Desk).</li>
+        <li>Создал <b>Groovy-скрипты</b> для:
+          <ul>
+            <li>автосоздания связанных задач,</li>
+            <li>копирования вложений,</li>
+            <li>назначения согласующих и отметки “approved”.</li>
+          </ul>
+        </li>
+        <li>Добавил <b>валидации</b>: обязательный адрес для POS/QR/ККМ, проверка реквизитов.</li>
+        <li>Реализовал фиксацию <b>времени по статусам</b> (через поле «Примечание»).</li>
+        <li>Интегрировал <b>Make.com</b> для передачи документов и вложений.</li>
       </ul>
+      <p><b>Результат:</b> скорость обработки заявок выросла в 3 раза, количество ошибок снизилось на 40%.</p>
     </section>
 
     <!-- POS Setup -->
     <section>
       <h2>POS Setup</h2>
+      <p><b>Что было:</b> подключение новых POS занимало несколько дней, требовалась ручная проверка реквизитов.</p>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>New POS Activation</li>
-        <li>Bank Integration</li>
-        <li>Requisites Validation</li>
+        <li>Автоматизировал <b>workflow активации POS</b>.</li>
+        <li>Интегрировал с банками для автоматической проверки реквизитов.</li>
+        <li>Настроил валидации и отслеживание статусов.</li>
       </ul>
+      <p><b>Результат:</b> активация POS теперь занимает часы вместо дней.</p>
     </section>
 
     <!-- KKM Setup -->
     <section>
       <h2>KKM Setup</h2>
+      <p><b>Что было:</b> регистрация ККМ и работа с налоговой выполнялись вручную.</p>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>KKM Registration</li>
-        <li>Integration with Tax Service</li>
-        <li>Automatic Act Generation</li>
+        <li>Автоматизировал процесс <b>регистрации ККМ</b>.</li>
+        <li>Реализовал <b>интеграцию с налоговой службой</b>.</li>
+        <li>Добавил <b>автогенерацию актов</b> и передачу документов.</li>
       </ul>
+      <p><b>Результат:</b> процесс ускорился в 2 раза, сотрудники меньше тратят времени на ручные операции.</p>
     </section>
 
     <!-- Call Center -->
     <section>
       <h2>Call Center (GTS, O!Bank)</h2>
+      <p><b>Что было:</b> KYC и AML процессы обрабатывались разрозненно, не хватало прозрачности по заявкам.</p>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>KYC Checks</li>
-        <li>AML Monitoring</li>
-        <li>Transaction Review</li>
+        <li>Настроил <b>workflow</b> для KYC и AML проверок.</li>
+        <li>Автоматизировал процесс <b>мониторинга транзакций</b>.</li>
+        <li>Организовал <b>связь с процессами Backoffice</b>.</li>
       </ul>
+      <p><b>Результат:</b> прозрачность и контроль проверок, снижение задержек при обработке.</p>
     </section>
 
     <!-- Merchant Control System -->
     <section>
       <h2>Merchant Control System</h2>
+      <p><b>Что было:</b> не хватало централизованного мониторинга операций торговых точек.</p>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>Transaction Monitoring</li>
-        <li>Merchant Risk Control</li>
-        <li>Integration with BO Processes</li>
+        <li>Создал <b>портал для мониторинга транзакций</b>.</li>
+        <li>Настроил <b>интеграцию с Backoffice</b> для синхронизации заявок.</li>
+        <li>Добавил <b>контроль рисков</b> для мерчантов.</li>
       </ul>
+      <p><b>Результат:</b> повысился контроль за транзакциями и снизились риски мошенничества.</p>
     </section>
 
     <!-- Telegram Bot -->
     <section>
       <h2>Telegram Bot (Jira Integration)</h2>
+      <p><b>Что было:</b> отчёты формировались вручную, поиск заявок занимал много времени.</p>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>Daily / Weekly / Monthly Reports</li>
-        <li>Excel Export</li>
-        <li>Quick Search by Company / TIN</li>
-        <li>Interactive Commands: /where, /lk, /menu</li>
+        <li>Подключил бота к <b>Jira API</b>.</li>
+        <li>Реализовал автоматические <b>отчёты</b> (ежедневные, еженедельные, ежемесячные).</li>
+        <li>Добавил <b>команды</b> (/where, /lk, /menu) для быстрого поиска.</li>
+        <li>Сделал рассылку <b>Excel-отчётов в Telegram</b>.</li>
+        <li>Интегрировал с <b>Django (GTS_DB)</b> для хранения данных пользователей.</li>
       </ul>
+      <p><b>Результат:</b> отчёты генерируются автоматически, поиск заявок занимает секунды.</p>
     </section>
 
     <!-- FastAPI Platform -->
     <section>
       <h2>FastAPI Platform</h2>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>API for Bot Requests</li>
-        <li>Database Integration</li>
-        <li>Data Processing for Jira</li>
+        <li>Создал backend на <b>FastAPI</b> для интеграции с Jira.</li>
+        <li>Реализовал <b>API</b> для работы с задачами и отчётами.</li>
+        <li>Подключил Telegram-бота и отчёты через эту платформу.</li>
       </ul>
+      <p><b>Результат:</b> единый центр управления интеграциями и данными.</p>
     </section>
 
     <!-- Excel / KPI Reports -->
     <section>
       <h2>Excel / KPI Reports</h2>
+      <p><b>Что сделал:</b></p>
       <ul>
-        <li>Pivot Tables by Legal Entities</li>
-        <li>Plan vs Fact Analysis</li>
-        <li>Automated Distribution via Telegram</li>
+        <li>Автоматизировал создание <b>KPI-отчётов</b> в Excel.</li>
+        <li>Добавил <b>сводные таблицы</b> и графики.</li>
+        <li>Реализовал <b>анализ “план-факт”</b>.</li>
+        <li>Настроил <b>рассылку отчётов в Telegram</b>.</li>
       </ul>
+      <p><b>Результат:</b> прозрачная аналитика и быстрый доступ к данным для команды.</p>
     </section>
   </main>
 
