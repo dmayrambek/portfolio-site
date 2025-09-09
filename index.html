@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Живой фон -->
+  <div id="tsparticles"></div>
+
   <!-- HERO HEADER -->
   <header class="hero">
     <h1>Automation Portfolio</h1>
@@ -54,5 +57,33 @@
   <footer>
     <p>© 2025 Backoffice Automation</p>
   </footer>
+
+  <!-- tsParticles -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    tsParticles.load("tsparticles", {
+      background: { color: "transparent" },
+      particles: {
+        number: { value: 70, density: { enable: true, value_area: 800 } },
+        color: { value: "#4da6ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.6, random: true },
+        size: { value: 3, random: true },
+        move: { enable: true, speed: 1.2, out_mode: "out" },
+        line_linked: { enable: true, distance: 150, color: "#4da6ff", opacity: 0.4, width: 1 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 120 },
+          push: { quantity: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>
