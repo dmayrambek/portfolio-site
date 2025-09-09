@@ -64,36 +64,37 @@
   tsParticles.load("tsparticles", {
   background: { color: "transparent" },
   particles: {
-    number: { value: 80, density: { enable: true, area: 800 } },
+    number: { value: 50 },
     color: { value: ["#4da6ff", "#c864ff", "#00ffe0"] },
     shape: { type: "circle" },
-    opacity: {
-      value: 0.6,
-      random: true,
-      anim: { enable: true, speed: 1, opacity_min: 0.3 }
-    },
-    size: {
-      value: 2.5,
-      random: true,
-      anim: { enable: true, speed: 1.5, size_min: 1 }
-    },
+    opacity: { value: 0.6, random: true },
+    size: { value: 2, random: true },
     links: {
       enable: true,
-      distance: 140,
+      distance: 160,
       color: "#4da6ff",
-      opacity: 0.4,
-      width: 1,
-      shadow: { enable: true, blur: 6, color: "#00ffe0" }
+      opacity: 0.3,
+      width: 1
     },
-    move: { enable: true, speed: 0.9 }
+    move: { enable: true, speed: 1.2, random: true }
   },
-  interactivity: {
-    events: { onHover: { enable: true, mode: "grab" } },
-    modes: { grab: { distance: 180, links: { opacity: 0.8 } } }
-  },
+  emitters: [
+    {
+      direction: "bottom-right",
+      rate: { delay: 8, quantity: 1 },
+      particles: {
+        color: { value: "#ffffff" },
+        size: { value: 3 },
+        move: { speed: 4, straight: true },
+        life: { duration: { value: 2 }, count: 1 },
+        opacity: { value: 1 }
+      }
+    }
+  ],
   detectRetina: true
 });
 </script>
 </body>
 </html>
+
 
