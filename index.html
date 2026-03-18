@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <title>Automation Portfolio</title>
@@ -11,46 +11,128 @@
       z-index: -1;
       pointer-events: none;
     }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
-      margin: 20px 0;
+
+    /* === ТЕМА === */
+    :root {
+      --bg: linear-gradient(135deg, #1E1F26, #283655, #4D648D);
+      --surface: rgba(40, 54, 85, 0.85);
+      --card-bg: rgba(50, 65, 105, 0.9);
+      --text: #D0E1F9;
+      --text-muted: #a0b8d8;
+      --accent: #4da6ff;
+      --border: rgba(77,166,255,0.2);
     }
-    .stat-card {
-      background: rgba(50, 65, 105, 0.9);
+    [data-theme="light"] {
+      --bg: linear-gradient(135deg, #e8f0fe, #dce8f8, #c8d8f0);
+      --surface: rgba(255,255,255,0.92);
+      --card-bg: rgba(240,246,255,0.95);
+      --text: #1a2a4a;
+      --text-muted: #4a6080;
+      --accent: #1a6fd4;
+      --border: rgba(26,111,212,0.2);
+    }
+    body {
+      background: var(--bg);
+      background-attachment: fixed;
+      color: var(--text);
+    }
+    section { background: var(--surface) !important; color: var(--text) !important; }
+    .card { background: var(--card-bg) !important; color: var(--text) !important; }
+    h1, h2, h3 { color: var(--text) !important; }
+    a { color: var(--accent) !important; }
+    footer { color: var(--text-muted) !important; }
+
+    /* === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ === */
+    .theme-toggle {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      z-index: 2000;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+    .theme-toggle:hover { border-color: var(--accent); transform: scale(1.05); }
+
+    /* === ПОИСКОВИК === */
+    .search-wrapper { margin: 0 0 16px 0; position: relative; }
+    .search-input {
+      width: 100%;
+      padding: 12px 20px 12px 44px;
       border-radius: 12px;
-      padding: 20px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      pointer-events: none;
+    }
+    .search-count { font-size: 12px; color: var(--text-muted); margin-top: 6px; margin-left: 4px; min-height: 18px; }
+    .card[data-hidden="true"] { display: none !important; }
+    .no-results { display: none; text-align: center; color: var(--text-muted); font-size: 14px; padding: 20px; grid-column: 1 / -1; }
+
+    /* === STATS === */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 16px 0; }
+    .stat-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 18px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
       transition: transform 0.2s;
     }
     .stat-card:hover { transform: translateY(-4px); }
-    .stat-card .num {
-      font-size: 36px;
-      font-weight: bold;
-      color: #4da6ff;
-      display: block;
+    .stat-num { font-size: 32px; font-weight: bold; color: var(--accent); display: block; }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; display: block; }
+
+    /* === BADGE === */
+    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: bold; margin-top: 8px; }
+    .badge-prod { background: rgba(0,200,100,0.15); color: #00c864; border: 1px solid #00c864; }
+    .badge-mvp  { background: rgba(255,180,0,0.12); color: #ffb400; border: 1px solid #ffb400; }
+
+    /* === CARDS === */
+    .skills-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .skills-cards .card {
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
-    .stat-card .label {
-      font-size: 13px;
-      color: #a0b8d8;
-      margin-top: 4px;
-      display: block;
+    .skills-cards .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(77,166,255,0.15);
     }
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-    .badge-prod { background: rgba(0,200,100,0.2); color: #00c864; border: 1px solid #00c864; }
-    .badge-mvp  { background: rgba(255,180,0,0.15); color: #ffb400; border: 1px solid #ffb400; }
   </style>
 </head>
 <body>
+
+  <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+    <span id="themeIcon">☀️</span>
+    <span id="themeLabel">Light</span>
+  </button>
+
   <div id="tsparticles"></div>
 
   <header class="hero">
@@ -66,7 +148,7 @@
   </header>
 
   <main>
-    <!-- INTRO -->
+
     <section class="intro">
       <h2>👋 Welcome, my friend</h2>
       <p>Специализация — автоматизация бизнес-процессов, Jira integrations, ScriptRunner Jobs и автоматические отчёты.</p>
@@ -77,71 +159,72 @@
       </div>
     </section>
 
-    <!-- STATS -->
     <section>
       <h2>📈 В цифрах</h2>
       <div class="stats">
-        <div class="stat-card">
-          <span class="num">5</span>
-          <span class="label">Jobs автоматизировано</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">7</span>
-          <span class="label">Проектов в production</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">3x</span>
-          <span class="label">Скорость обработки заявок</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">40%</span>
-          <span class="label">Снижение ошибок</span>
-        </div>
-        <div class="stat-card">
-          <span class="num">80%</span>
-          <span class="label">Ускорение передачи данных</span>
-        </div>
+        <div class="stat-card"><span class="stat-num" data-target="5">0</span><span class="stat-label">Jobs автоматизировано</span></div>
+        <div class="stat-card"><span class="stat-num" data-target="7">0</span><span class="stat-label">Проектов в production</span></div>
+        <div class="stat-card"><span class="stat-num">3x</span><span class="stat-label">Скорость обработки</span></div>
+        <div class="stat-card"><span class="stat-num" data-target="40">0</span><span class="stat-label">% снижение ошибок</span></div>
+        <div class="stat-card"><span class="stat-num" data-target="80">0</span><span class="stat-label">% ускорение передачи</span></div>
       </div>
     </section>
 
-    <!-- SKILLS CARDS -->
-    <section class="skills-cards">
-      <div class="card">
-        <h3>⚙️ Jira Automation</h3>
-        <p>Workflow, Dynamic Forms, Groovy scripts, validators.</p>
-        <span class="badge badge-prod">Production</span>
+    <section>
+      <h2>🔍 Навыки и технологии</h2>
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="searchInput" placeholder="Поиск: Groovy, POS, Excel, Reports..." oninput="filterCards()"/>
       </div>
-      <div class="card">
-        <h3>⏰ ScriptRunner Jobs</h3>
-        <p>Автоматические отчёты, рассылки, обработка задач по расписанию.</p>
-        <span class="badge badge-prod">Production</span>
+      <div class="search-count" id="searchCount"></div>
+      <div class="skills-cards" id="cardsGrid">
+        <div class="card" data-tags="jira automation workflow groovy динамические формы валидации">
+          <h3>⚙️ Jira Automation</h3>
+          <p>Workflow, Dynamic Forms, Groovy scripts, validators.</p>
+          <span class="badge badge-prod">Production</span>
+        </div>
+        <div class="card" data-tags="scriptrunner jobs автоотчёты расписание рассылка groovy">
+          <h3>⏰ ScriptRunner Jobs</h3>
+          <p>Автоматические отчёты, рассылки, обработка задач по расписанию.</p>
+          <span class="badge badge-prod">Production</span>
+        </div>
+        <div class="card" data-tags="groovy скрипты автосоздание задач валидации вложения интеграция">
+          <h3>🤖 Groovy Scripts</h3>
+          <p>Автосоздание задач, валидации, копирование вложений, интеграции.</p>
+          <span class="badge badge-prod">Production</span>
+        </div>
+        <div class="card" data-tags="reports excel kpi csv отчёты рассылка автоматизация">
+          <h3>📊 Reports</h3>
+          <p>Excel KPIs, CSV-отчёты, автоматическая рассылка по расписанию.</p>
+          <span class="badge badge-prod">Production</span>
+        </div>
+        <div class="card" data-tags="telegram bot jira api поиск авторизация отчёты">
+          <h3>🤖 Telegram Bot</h3>
+          <p>Jira API, поиск заявок, авторизация, рассылка отчётов.</p>
+          <span class="badge badge-mvp">MVP</span>
+        </div>
+        <div class="card" data-tags="fastapi backend api интеграции python база данных">
+          <h3>💻 FastAPI</h3>
+          <p>Backend-платформа для интеграций, хранение данных, REST API.</p>
+          <span class="badge badge-mvp">MVP</span>
+        </div>
+        <div class="card" data-tags="pos qr терминал активация банк интеграция">
+          <h3>🖥️ POS Setup</h3>
+          <p>Автоматизация активации POS-терминалов, интеграция с банками.</p>
+          <span class="badge badge-prod">Production</span>
+        </div>
+        <div class="card" data-tags="kkm кассовый аппарат автоматизация workflow">
+          <h3>🧾 KKM Setup</h3>
+          <p>Автоматизация настройки ККМ, передача вложений между проектами.</p>
+          <span class="badge badge-prod">Production</span>
+        </div>
       </div>
-      <div class="card">
-        <h3>🤖 Groovy Scripts</h3>
-        <p>Автосоздание задач, валидации, копирование вложений, интеграции.</p>
-        <span class="badge badge-prod">Production</span>
-      </div>
-      <div class="card">
-        <h3>📊 Reports</h3>
-        <p>Excel KPIs, CSV-отчёты, автоматическая рассылка по расписанию.</p>
-        <span class="badge badge-prod">Production</span>
-      </div>
-      <div class="card">
-        <h3>🤖 Telegram Bot</h3>
-        <p>Jira API, поиск заявок, авторизация, рассылка отчётов.</p>
-        <span class="badge badge-mvp">MVP</span>
-      </div>
-      <div class="card">
-        <h3>💻 FastAPI</h3>
-        <p>Backend-платформа для интеграций, хранение данных, REST API.</p>
-        <span class="badge badge-mvp">MVP</span>
-      </div>
+      <div class="no-results" id="noResults">😕 Ничего не найдено по запросу</div>
     </section>
+
   </main>
 
-  <footer>
-    <p>© 2025-2026 Automation</p>
-  </footer>
+  <footer><p>© 2026 Backoffice Automation</p></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <script>
@@ -154,24 +237,66 @@
         shape: { type: "circle" },
         opacity: { value: 0.8 },
         size: { value: 2, random: true },
-        move: {
-          enable: true,
-          speed: 2.5,
-          direction: "none",
-          straight: true,
-          outModes: "out",
-          random: false,
-          warp: true
-        }
+        move: { enable: true, speed: 2.5, direction: "none", straight: true, outModes: "out", random: false, warp: true }
       },
       detectRetina: true,
-      interactivity: {
-        events: {
-          onHover: { enable: false },
-          onClick: { enable: false }
-        }
-      }
+      interactivity: { events: { onHover: { enable: false }, onClick: { enable: false } } }
     });
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = isDark ? 'Dark' : 'Light';
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    const saved = localStorage.getItem('theme');
+    if (saved && saved !== 'dark') {
+      document.documentElement.setAttribute('data-theme', saved);
+      document.getElementById('themeIcon').textContent = '🌙';
+      document.getElementById('themeLabel').textContent = 'Dark';
+    }
+
+    function filterCards() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#cardsGrid .card');
+      let visible = 0;
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags') || '';
+        const text = (card.textContent + ' ' + tags).toLowerCase();
+        const match = !query || text.includes(query);
+        card.setAttribute('data-hidden', match ? 'false' : 'true');
+        if (match) visible++;
+      });
+      const countEl = document.getElementById('searchCount');
+      const noRes = document.getElementById('noResults');
+      if (query) {
+        countEl.textContent = 'Найдено: ' + visible + ' из ' + cards.length;
+        noRes.style.display = visible === 0 ? 'block' : 'none';
+      } else {
+        countEl.textContent = '';
+        noRes.style.display = 'none';
+      }
+    }
+
+    function animateCounters() {
+      document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'));
+        let current = 0;
+        const step = Math.ceil(target / 30);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current;
+          if (current >= target) clearInterval(timer);
+        }, 40);
+      });
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounters(); observer.disconnect(); } });
+    }, { threshold: 0.3 });
+    const statsEl = document.querySelector('.stats');
+    if (statsEl) observer.observe(statsEl);
   </script>
 </body>
 </html>
