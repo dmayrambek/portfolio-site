@@ -235,9 +235,9 @@ footer {
 }
 
 /* === PARTICLES === */
-#tsparticles {
+#neural-bg {
   position: fixed;
   inset: 0;
-  z-index: -5;
+  z-index: -1;
   pointer-events: none;
 }
