@@ -16,39 +16,34 @@
       .badge-col { display: flex; justify-content: center; }
     }
 
-    /* === ВЕРЁВКА И КАРТОЧКА === */
+    /* === ВЕРЁВКА CANVAS === */
     .badge-col {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding-top: 10px;
+      position: relative;
     }
-    .rope {
-      width: 2px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(160,180,220,0.6), rgba(160,180,220,0.2));
-      border-radius: 2px;
+    #ropeCanvas {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 1;
     }
-    .clip {
-      width: 28px;
-      height: 12px;
-      background: rgba(160,180,220,0.25);
-      border: 1px solid rgba(160,180,220,0.4);
-      border-radius: 4px;
-      margin-bottom: -1px;
-    }
-
     .badge-card {
       width: 220px;
       background: rgba(18, 22, 32, 0.95);
       border: 1px solid rgba(77,166,255,0.2);
       border-radius: 16px;
       overflow: hidden;
-      transform-origin: top center;
-      transition: transform 0.1s ease-out;
       will-change: transform;
       cursor: default;
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 2;
+      margin-top: 60px;
     }
 
     .badge-header {
@@ -56,7 +51,7 @@
       border-bottom: 1px solid rgba(77,166,255,0.15);
       padding: 10px 16px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
     .badge-header .brand {
@@ -65,11 +60,6 @@
       letter-spacing: 2.5px;
       font-family: monospace;
       font-weight: 600;
-    }
-    .badge-header .card-id {
-      font-size: 9px;
-      color: #4a6080;
-      font-family: monospace;
     }
 
     .badge-photo {
@@ -222,14 +212,13 @@
 
         <!-- Карточка на верёвке -->
         <div class="badge-col">
-          <div class="rope"></div>
-          <div class="clip"></div>
-          <div class="badge-card" id="badgeCard">
+        <!-- Верёвка canvas -->
+        <canvas id="ropeCanvas" width="300" height="80"></canvas>
+        <div class="badge-card" id="badgeCard">
             <div class="badge-header">
               <span class="brand">AUTOLAB</span>
-              <span class="card-id">#001</span>
             </div>
-            <img class="badge-photo" src="../images/avatar.jpg" alt="DM" />
+            <img class="badge-photo" src="../images/avatar.jpg" alt="DM" onerror="this.style.display='none'" />
             <div class="badge-body">
               <div class="badge-name">DM</div>
               <div class="badge-role">Jira Automation Engineer</div>
@@ -321,28 +310,73 @@
 
   <script>
     const card = document.getElementById('badgeCard');
-    let currentX = 0, currentY = 0;
-    let targetX = 0, targetY = 0;
+    const canvas = document.getElementById('ropeCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Точка крепления (вверху по центру карточки)
+    const anchorX = 150;
+    const anchorY = 0;
+
+    // Состояние маятника
+    let cardX = 150;  // текущий X центра карточки
+    let cardVX = 0;   // скорость
+    let mouseX = window.innerWidth / 2;
 
     document.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const dx = (e.clientX - centerX) / window.innerWidth;
-      const dy = (e.clientY - centerY) / window.innerHeight;
-      targetX = dy * 14;
-      targetY = -dx * 14;
+      mouseX = e.clientX;
     });
 
-    document.addEventListener('mouseleave', () => {
-      targetX = 0;
-      targetY = 0;
-    });
+    function drawRope(fromX, fromY, toX, toY) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Провис верёвки — контрольная точка чуть ниже середины
+      const midX = (fromX + toX) / 2;
+      const midY = (fromY + toY) / 2 + 18;
+
+      // Верёвка
+      ctx.beginPath();
+      ctx.moveTo(fromX, fromY);
+      ctx.quadraticCurveTo(midX, midY, toX, toY);
+      ctx.strokeStyle = 'rgba(180,200,230,0.5)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Клипса сверху
+      ctx.fillStyle = 'rgba(160,180,220,0.3)';
+      ctx.strokeStyle = 'rgba(160,180,220,0.5)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.roundRect(fromX - 12, fromY, 24, 10, 3);
+      ctx.fill();
+      ctx.stroke();
+    }
 
     function animate() {
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
-      card.style.transform = `perspective(600px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      const badgeRect = card.getBoundingClientRect();
+      const colRect = card.parentElement.getBoundingClientRect();
+
+      // Позиция курсора относительно колонки
+      const relMouseX = mouseX - colRect.left;
+      const centerCol = colRect.width / 2;
+
+      // Притяжение к курсору
+      const pull = (relMouseX - centerCol) * 0.04;
+      const spring = (centerCol + pull - cardX) * 0.05;
+      cardVX += spring;
+      cardVX *= 0.85;
+      cardX += cardVX;
+
+      // Ограничение качания
+      const maxSwing = 60;
+      cardX = Math.max(centerCol - maxSwing, Math.min(centerCol + maxSwing, cardX));
+
+      // Сдвигаем карточку
+      const offset = cardX - centerCol;
+      card.style.transform = `translateX(${offset}px) rotate(${offset * 0.08}deg)`;
+
+      // Рисуем верёвку от верхней точки до верхнего центра карточки
+      drawRope(anchorX, anchorY, anchorX + offset, 70);
+
       requestAnimationFrame(animate);
     }
     animate();
