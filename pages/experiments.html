@@ -1,81 +1,88 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Experiments - Automation Portfolio</title>
-  <link rel="stylesheet" href="../style.css">
+<meta charset="UTF-8">
+<title>Experiments - Automation Portfolio</title>
+<link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header>
-    <h1>Эксперименты</h1>
-    <nav>
-      <a href="pages/projects.html">Projects</a>
-      <a href="pages/cases.html">Cases</a>
-      <a href="pages/skills.html">Skills</a>
-      <a href="pages/experiments.html">Experiments</a>
-      <a href="pages/about.html">About Me</a>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Telegram Bot -->
-    <section>
-      <h2>🤖 Telegram Bot + Jira</h2>
-      <p>Прототипы интеграций, тестирование различных команд и сценариев.</p>
-      <ul>
-        <li>Команды для поиска заявок по ИНН и юр. названию</li>
-        <li>Эксперименты с аутентификацией пользователей</li>
-        <li>Автоматическая генерация Excel-отчётов</li>
-      </ul>
-    </section>
+<header>
+  <h1>FlowMaster</h1>
+  <nav>
+    <a href="projects.html">Projects</a>
+    <a href="cases.html">Cases</a>
+    <a href="skills.html">Skills</a>
+    <a href="experiments.html">Experiments</a>
+    <a href="about.html">About Me</a>
+  </nav>
+</header>
 
-    <!-- FastAPI -->
-    <section>
-      <h2>⚡ FastAPI Platform</h2>
-      <p>Тестирование API как центра интеграций.</p>
-      <ul>
-        <li>Прототипы REST API для Jira</li>
-        <li>Система хранения логов и пользователей (DBC System)</li>
-        <li>Эксперименты с подключением к Telegram Bot</li>
-      </ul>
-    </section>
+<main>
 
-    <!-- Jira Automation -->
-    <section>
-      <h2>🛠 Jira Automation</h2>
-      <p>Исследования и тестовые скрипты для автоматизации.</p>
-      <ul>
-        <li>Groovy-скрипты для автосоздания задач</li>
-        <li>Проверка новых схем workflow</li>
-        <li>Валидации полей (адрес, ИНН, согласующие)</li>
-      </ul>
-    </section>
+  <!-- Telegram Bot -->
+  <section>
+    <h2>🤖 Telegram Bot + Jira (MVP)</h2>
+    <p>Разработан Telegram-бот с полноценной интеграцией Jira API. Проект доведён до уровня MVP и полностью функционален — не запущен в production по внутренним причинам компании.</p>
+    <p><b>Реализовано:</b></p>
+    <ul>
+      <li>Подключение к <b>Jira API</b> — поиск задач, получение статусов, данных по заявкам.</li>
+      <li>Двухэтапная аутентификация (<b>/start</b>) — проверка корпоративной почты и пароля через базу данных, доступ только авторизованным пользователям.</li>
+      <li>Быстрый поиск заявок:
+        <ul>
+          <li><b>/where</b> — поиск в проекте BO (ИНН, статус, номер заявки, юр. название, автор, исполнитель).</li>
+          <li><b>/where_buh</b> — поиск в проекте GTE для бухгалтерии.</li>
+          <li><b>/where_lk</b> — выдача логина и пароля от личного кабинета партнёра.</li>
+        </ul>
+      </li>
+      <li>Автоматическая рассылка <b>Excel-отчётов</b> прямо в Telegram (ежедневные, еженедельные, ежемесячные).</li>
+      <li>Интеграция с <b>FastAPI DBC System</b> для хранения данных пользователей и статистики.</li>
+      <li>Сбор <b>статистики по заявкам</b> (по ИНН, по проектам, по времени обработки).</li>
+    </ul>
+    <p><i>Статус: MVP готов. Не запущен в production.</i></p>
+  </section>
 
-    <!-- Reports -->
-    <section>
-      <h2>📊 Отчёты и KPI</h2>
-      <p>Эксперименты с аналитикой и визуализацией.</p>
-      <ul>
-        <li>Генерация Excel с графиками</li>
-        <li>Сравнение план/факт по заявкам</li>
-        <li>Интеграция отчётности в Telegram</li>
-      </ul>
-    </section>
+  <!-- FastAPI Platform -->
+  <section>
+    <h2>⚡ FastAPI Platform (MVP)</h2>
+    <p>Разработана backend-платформа как единый центр интеграций между Jira и Telegram Bot. Проект доведён до уровня MVP.</p>
+    <p><b>Реализовано:</b></p>
+    <ul>
+      <li>Backend на <b>FastAPI</b> для интеграции с Jira и Telegram Bot.</li>
+      <li>REST API для обработки запросов и управления заявками.</li>
+      <li>Интеграция с <b>DBC System (Data Base Control System)</b> — хранение данных пользователей и логов обращений.</li>
+      <li>Централизованная обработка команд Telegram Bot.</li>
+      <li>Сбор <b>статистики по заявкам и активности пользователей</b>.</li>
+    </ul>
+    <p><i>Статус: MVP готов. Не запущен в production.</i></p>
+  </section>
 
-    <!-- Creative / Side Projects -->
-    <section>
-      <h2>🎨 Дополнительные проекты</h2>
-      <p>Небольшие идеи и эксперименты вне основной работы.</p>
-      <ul>
-        <li>Сайт-портфолио (GitHub Pages)</li>
-        <li>Прототипы динамических форм</li>
-        <li>Первые попытки интеграции с внешними сервисами</li>
-      </ul>
-    </section>
-  </main>
+  <!-- Jira Automation experiments -->
+  <section>
+    <h2>🛠 Jira Automation — Эксперименты</h2>
+    <p>Исследования и тестовые скрипты для автоматизации процессов.</p>
+    <ul>
+      <li>Groovy-скрипты для автосоздания задач</li>
+      <li>Проверка новых схем workflow</li>
+      <li>Валидации полей (адрес, ИНН, согласующие)</li>
+      <li>Прототипы динамических форм</li>
+    </ul>
+  </section>
 
-  <footer>
-    <p>© 2025 Backoffice Automation</p>
-  </footer>
+  <!-- Side Projects -->
+  <section>
+    <h2>🎨 Дополнительные проекты</h2>
+    <ul>
+      <li>Сайт-портфолио (GitHub Pages) — данный сайт</li>
+      <li>Первые попытки интеграции с внешними сервисами</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Backoffice Automation</p>
+</footer>
+
 </body>
 </html>
