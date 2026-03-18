@@ -138,7 +138,7 @@
       to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
     }
 
-    /* Заголовок FlowMaster — появляется с задержкой */
+    /* Заголовок AutoLab — появляется с задержкой */
     .hero h1 {
       animation: titleReveal 1s ease 1.6s both;
     }
@@ -195,7 +195,7 @@
   <canvas id="neural-bg"></canvas>
 
   <header class="hero">
-    <h1>FlowMaster</h1>
+    <h1>AutoLab</h1>
     <p>Jira • ScriptRunner • Groovy • Reports</p>
     <nav>
       <a href="pages/projects.html">Projects</a>
@@ -283,7 +283,7 @@
 
   </main>
 
-  <footer><p>© 2025–2026 Backoffice Automation</p></footer>
+  <footer><p>© 2025–2026 Automation</p></footer>
 
   <script>
     // === НЕЙРОСЕТЬ ===
@@ -439,14 +439,17 @@
       document.querySelectorAll('.stat-num[data-target]').forEach(el => {
         const target = parseInt(el.getAttribute('data-target'));
         let current = 0;
-        const step = Math.ceil(target / 30);
+        const step = Math.ceil(target / 40);
         const timer = setInterval(() => {
           current = Math.min(current + step, target);
           el.textContent = current;
           if (current >= target) clearInterval(timer);
-        }, 40);
+        }, 50);
       });
     }
+    // Запускаем счётчики после кинематографического входа
+    setTimeout(animateCounters, 2800);
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { animateCounters(); observer.disconnect(); } });
     }, { threshold: 0.3 });
