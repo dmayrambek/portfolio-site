@@ -2,122 +2,43 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>About Me - Automation Portfolio</title>
+  <title>About Me - AutoLab</title>
   <link rel="stylesheet" href="../style.css">
   <style>
-    .about-layout {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 32px;
-      align-items: start;
-    }
-    @media (max-width: 700px) {
-      .about-layout { grid-template-columns: 1fr; }
-      .badge-col { display: flex; justify-content: center; }
-    }
-
-    /* === ВЕРЁВКА CANVAS === */
-    .badge-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 10px;
+    /* === HERO ROPE SECTION === */
+    .rope-hero {
       position: relative;
-    }
-    #ropeCanvas {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .badge-card {
-      width: 220px;
-      background: rgba(18, 22, 32, 0.95);
-      border: 1px solid rgba(77,166,255,0.2);
-      border-radius: 16px;
-      overflow: hidden;
-      will-change: transform;
-      cursor: default;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      position: relative;
-      z-index: 2;
-      margin-top: 60px;
-    }
-
-    .badge-header {
-      background: rgba(77,166,255,0.08);
-      border-bottom: 1px solid rgba(77,166,255,0.15);
-      padding: 10px 16px;
+      width: 100%;
+      height: 520px;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
+      overflow: hidden;
+      background: transparent;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
     }
-    .badge-header .brand {
-      font-size: 10px;
-      color: #4da6ff;
-      letter-spacing: 2.5px;
-      font-family: monospace;
-      font-weight: 600;
-    }
+    .rope-hero:hover { transform: none !important; }
 
-    .badge-photo {
+    #ropeCanvas {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      filter: grayscale(20%);
+      height: 100%;
+      cursor: grab;
     }
+    #ropeCanvas:active { cursor: grabbing; }
 
-    .badge-body {
-      padding: 14px 16px;
-    }
-    .badge-name {
-      font-size: 18px;
-      font-weight: 700;
-      color: #e2ecff;
-      margin: 0 0 2px 0;
-      font-family: monospace;
-    }
-    .badge-role {
+    .hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 11px;
-      color: #4da6ff;
-      margin: 0 0 10px 0;
-      letter-spacing: 0.5px;
-    }
-    .badge-location {
-      font-size: 11px;
-      color: #6a8aaa;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 12px;
-    }
-
-    .badge-footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #00c864;
-      box-shadow: 0 0 6px rgba(0,200,100,0.6);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    .status-text {
-      font-size: 10px;
-      color: #6a8aaa;
+      color: rgba(160,180,220,0.4);
+      letter-spacing: 1.5px;
+      pointer-events: none;
       font-family: monospace;
     }
 
@@ -128,10 +49,9 @@
       gap: 14px;
       padding: 14px;
       background: rgba(40, 54, 85, 0.6);
-      border-radius: 10px;
-      margin-bottom: 10px;
       border-left: 3px solid #4da6ff;
       border-radius: 0;
+      margin-bottom: 10px;
     }
     .achievement .icon { font-size: 20px; min-width: 28px; text-align: center; }
     .achievement .text strong { display: block; color: #4da6ff; font-size: 14px; }
@@ -155,11 +75,7 @@
       border: 1px solid rgba(255,255,255,0.07);
       transition: transform 0.2s, border-color 0.2s;
     }
-    .contact-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(77,166,255,0.3);
-      color: #ffffff !important;
-    }
+    .contact-card:hover { transform: translateY(-3px); border-color: rgba(77,166,255,0.3); color: #fff !important; }
     .contact-card .c-icon { font-size: 22px; min-width: 30px; text-align: center; }
     .contact-card .c-info strong { display: block; font-size: 13px; color: #4da6ff; }
     .contact-card .c-info span { font-size: 11px; color: #a0b8d8; }
@@ -172,9 +88,9 @@
     }
     .focus-item {
       background: rgba(40, 54, 85, 0.5);
+      border-left: 2px solid #c864ff;
       border-radius: 0;
       padding: 12px 16px;
-      border-left: 2px solid #c864ff;
       font-size: 13px;
       color: #c9d8f0;
     }
@@ -206,48 +122,26 @@
 
   <main>
 
-    <!-- Intro с карточкой -->
+    <!-- КАНАТ + КАРТОЧКА -->
+    <section class="rope-hero">
+      <canvas id="ropeCanvas"></canvas>
+      <div class="hint">← потяни карточку →</div>
+    </section>
+
+    <!-- Текст -->
     <section>
-      <div class="about-layout">
-
-        <!-- Карточка на верёвке -->
-        <div class="badge-col">
-        <!-- Верёвка canvas -->
-        <canvas id="ropeCanvas" width="300" height="80"></canvas>
-        <div class="badge-card" id="badgeCard">
-            <div class="badge-header">
-              <span class="brand">AUTOLAB</span>
-            </div>
-            <img class="badge-photo" src="../images/avatar.jpg" alt="DM" onerror="this.style.display='none'" />
-            <div class="badge-body">
-              <div class="badge-name">DM</div>
-              <div class="badge-role">Jira Automation Engineer</div>
-              <div class="badge-location">📍 Kyrgyzstan, Bishkek</div>
-            </div>
-            <div class="badge-footer">
-              <div class="status-dot"></div>
-              <span class="status-text">online · available</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Текст -->
-        <div>
-          <h2>👋 Привет!</h2>
-          <p>Специализация — автоматизация бизнес-процессов, Jira Service Management, ScriptRunner Jobs и интеграции.</p>
-          <p>Путь — это постоянные эксперименты и поиск решений, которые помогают командам работать быстрее и прозрачнее.</p>
-          <div style="margin-top: 14px;">
-            <span class="tag">Jira Service Management</span>
-            <span class="tag">ScriptRunner</span>
-            <span class="tag">Groovy</span>
-            <span class="tag">JQL</span>
-            <span class="tag">Python</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Telegram Bot</span>
-            <span class="tag">Excel / KPI</span>
-          </div>
-        </div>
-
+      <h2>👋 Привет!</h2>
+      <p>Специализация — автоматизация бизнес-процессов, Jira Service Management, ScriptRunner Jobs и интеграции.</p>
+      <p>Путь — это постоянные эксперименты и поиск решений, которые помогают командам работать быстрее и прозрачнее.</p>
+      <div style="margin-top:14px;">
+        <span class="tag">Jira Service Management</span>
+        <span class="tag">ScriptRunner</span>
+        <span class="tag">Groovy</span>
+        <span class="tag">JQL</span>
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Telegram Bot</span>
+        <span class="tag">Excel / KPI</span>
       </div>
     </section>
 
@@ -277,7 +171,7 @@
     <!-- Личное -->
     <section>
       <h2>🌍 Немного лично</h2>
-      <p>Люблю находить решения, которые делают жизнь проще и бизнес — эффективнее. Интересно всё, что связано с автоматизацией, новыми инструментами и нестандартными подходами к задачам.</p>
+      <p>Люблю находить решения, которые делают жизнь проще и бизнес — эффективнее.</p>
       <p>Этот сайт — живое портфолио, которое регулярно обновляется по мере появления новых проектов и кейсов.</p>
     </section>
 
@@ -309,77 +203,304 @@
   <footer><p>© 2025–2026 Automation</p></footer>
 
   <script>
-    const card = document.getElementById('badgeCard');
     const canvas = document.getElementById('ropeCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Точка крепления (вверху по центру карточки)
-    const anchorX = 150;
-    const anchorY = 0;
+    // Размеры
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
 
-    // Состояние маятника
-    let cardX = 150;  // текущий X центра карточки
-    let cardVX = 0;   // скорость
-    let mouseX = window.innerWidth / 2;
+    // Физика верёвки — цепочка точек
+    const SEGMENTS = 12;
+    const ROPE_LEN = 160;
+    const SEG_LEN = ROPE_LEN / SEGMENTS;
+    const CARD_W = 200;
+    const CARD_H = 280;
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
+    let points = [];
+    function initPoints() {
+      const cx = canvas.width / 2;
+      points = [];
+      for (let i = 0; i <= SEGMENTS; i++) {
+        points.push({
+          x: cx,
+          y: i * SEG_LEN,
+          px: cx,
+          py: i * SEG_LEN,
+          pinned: i === 0
+        });
+      }
+    }
+    initPoints();
+
+    // Мышь / touch
+    let dragging = false;
+    let dragOffX = 0, dragOffY = 0;
+
+    function getCardPos() {
+      const tip = points[SEGMENTS];
+      return { x: tip.x - CARD_W / 2, y: tip.y };
+    }
+
+    function isOnCard(mx, my) {
+      const p = getCardPos();
+      return mx >= p.x && mx <= p.x + CARD_W && my >= p.y && my <= p.y + CARD_H;
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+      const r = canvas.getBoundingClientRect();
+      const mx = e.clientX - r.left;
+      const my = e.clientY - r.top;
+      if (isOnCard(mx, my)) {
+        dragging = true;
+        const p = getCardPos();
+        dragOffX = mx - (p.x + CARD_W / 2);
+        dragOffY = my - p.y;
+      }
     });
 
-    function drawRope(fromX, fromY, toX, toY) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      const r = canvas.getBoundingClientRect();
+      const mx = e.clientX - r.left;
+      const my = e.clientY - r.top;
+      const tip = points[SEGMENTS];
+      tip.x = mx - dragOffX;
+      tip.y = my - dragOffY;
+      tip.px = tip.x;
+      tip.py = tip.y;
+    });
 
-      // Провис верёвки — контрольная точка чуть ниже середины
-      const midX = (fromX + toX) / 2;
-      const midY = (fromY + toY) / 2 + 18;
+    canvas.addEventListener('mouseup', () => { dragging = false; });
+    canvas.addEventListener('mouseleave', () => { dragging = false; });
 
-      // Верёвка
+    // Touch
+    canvas.addEventListener('touchstart', (e) => {
+      const r = canvas.getBoundingClientRect();
+      const t = e.touches[0];
+      const mx = t.clientX - r.left;
+      const my = t.clientY - r.top;
+      if (isOnCard(mx, my)) {
+        dragging = true;
+        const p = getCardPos();
+        dragOffX = mx - (p.x + CARD_W / 2);
+        dragOffY = my - p.y;
+      }
+    }, { passive: true });
+
+    canvas.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const r = canvas.getBoundingClientRect();
+      const t = e.touches[0];
+      const mx = t.clientX - r.left;
+      const my = t.clientY - r.top;
+      const tip = points[SEGMENTS];
+      tip.x = mx - dragOffX;
+      tip.y = my - dragOffY;
+      tip.px = tip.x;
+      tip.py = tip.y;
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', () => { dragging = false; });
+
+    // Физика Verlet
+    function updatePhysics() {
+      const GRAVITY = 0.5;
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        if (p.pinned || (dragging && i === SEGMENTS)) continue;
+        const vx = (p.x - p.px) * 0.98;
+        const vy = (p.y - p.py) * 0.98;
+        p.px = p.x;
+        p.py = p.y;
+        p.x += vx;
+        p.y += vy + GRAVITY;
+      }
+
+      // Ограничения длины сегментов
+      for (let iter = 0; iter < 20; iter++) {
+        for (let i = 0; i < SEGMENTS; i++) {
+          const a = points[i];
+          const b = points[i + 1];
+          const dx = b.x - a.x;
+          const dy = b.y - a.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const diff = (dist - SEG_LEN) / dist;
+          if (!a.pinned) { a.x += dx * diff * 0.5; a.y += dy * diff * 0.5; }
+          if (!b.pinned && !(dragging && i + 1 === SEGMENTS)) { b.x -= dx * diff * 0.5; b.y -= dy * diff * 0.5; }
+        }
+
+        // Верхняя точка всегда по центру сверху
+        points[0].x = canvas.width / 2;
+        points[0].y = 0;
+      }
+    }
+
+    // Рисуем карточку
+    function drawCard(x, y, angle) {
+      ctx.save();
+      ctx.translate(x + CARD_W / 2, y + CARD_H / 2);
+      ctx.rotate(angle);
+
+      // Тень
+      ctx.shadowColor = 'rgba(0,0,0,0.5)';
+      ctx.shadowBlur = 20;
+      ctx.shadowOffsetY = 8;
+
+      // Фон карточки
+      const r = 14;
       ctx.beginPath();
-      ctx.moveTo(fromX, fromY);
-      ctx.quadraticCurveTo(midX, midY, toX, toY);
-      ctx.strokeStyle = 'rgba(180,200,230,0.5)';
+      ctx.roundRect(-CARD_W/2, -CARD_H/2, CARD_W, CARD_H, r);
+      ctx.fillStyle = '#0e1420';
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Рамка
+      ctx.strokeStyle = 'rgba(77,166,255,0.3)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Шапка
+      ctx.beginPath();
+      ctx.roundRect(-CARD_W/2, -CARD_H/2, CARD_W, 36, [r, r, 0, 0]);
+      ctx.fillStyle = 'rgba(77,166,255,0.1)';
+      ctx.fill();
+
+      // AUTOLAB текст
+      ctx.fillStyle = '#4da6ff';
+      ctx.font = '600 10px monospace';
+      ctx.textAlign = 'center';
+      ctx.letterSpacing = '3px';
+      ctx.fillText('AUTOLAB', 0, -CARD_H/2 + 22);
+
+      // Линия под шапкой
+      ctx.strokeStyle = 'rgba(77,166,255,0.15)';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(-CARD_W/2, -CARD_H/2 + 36);
+      ctx.lineTo(CARD_W/2, -CARD_H/2 + 36);
+      ctx.stroke();
+
+      // Фото
+      const img = window._avatar;
+      const photoY = -CARD_H/2 + 44;
+      const photoH = 120;
+      if (img && img.complete && img.naturalWidth > 0) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(-CARD_W/2, photoY, CARD_W, photoH);
+        ctx.clip();
+        ctx.drawImage(img, -CARD_W/2, photoY, CARD_W, photoH);
+        ctx.restore();
+      } else {
+        // Плейсхолдер
+        ctx.fillStyle = 'rgba(77,166,255,0.08)';
+        ctx.fillRect(-CARD_W/2, photoY, CARD_W, photoH);
+        ctx.fillStyle = 'rgba(77,166,255,0.4)';
+        ctx.font = '32px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('DM', 0, photoY + 70);
+      }
+
+      // Имя
+      ctx.fillStyle = '#e2ecff';
+      ctx.font = '700 16px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('DM', 0, -CARD_H/2 + 190);
+
+      // Должность
+      ctx.fillStyle = '#4da6ff';
+      ctx.font = '500 10px monospace';
+      ctx.fillText('Jira Automation Engineer', 0, -CARD_H/2 + 208);
+
+      // Локация
+      ctx.fillStyle = '#6a8aaa';
+      ctx.font = '9px monospace';
+      ctx.fillText('📍 Kyrgyzstan, Bishkek', 0, -CARD_H/2 + 226);
+
+      // Линия
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(-CARD_W/2 + 16, -CARD_H/2 + 242);
+      ctx.lineTo(CARD_W/2 - 16, -CARD_H/2 + 242);
+      ctx.stroke();
+
+      // Статус
+      ctx.beginPath();
+      ctx.arc(-CARD_W/2 + 26, -CARD_H/2 + 258, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#00c864';
+      ctx.fill();
+      ctx.fillStyle = '#6a8aaa';
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText('online · available', -CARD_W/2 + 36, -CARD_H/2 + 262);
+
+      ctx.restore();
+    }
+
+    // Рисуем канат
+    function drawRope() {
+      if (points.length < 2) return;
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.strokeStyle = 'rgba(180,200,230,0.6)';
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+
+      // Внутренняя нить
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      // Клипса сверху
-      ctx.fillStyle = 'rgba(160,180,220,0.3)';
-      ctx.strokeStyle = 'rgba(160,180,220,0.5)';
-      ctx.lineWidth = 1;
+      // Крепление сверху
       ctx.beginPath();
-      ctx.roundRect(fromX - 12, fromY, 24, 10, 3);
+      ctx.arc(points[0].x, points[0].y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(160,180,220,0.6)';
       ctx.fill();
-      ctx.stroke();
     }
 
-    function animate() {
-      const badgeRect = card.getBoundingClientRect();
-      const colRect = card.parentElement.getBoundingClientRect();
-
-      // Позиция курсора относительно колонки
-      const relMouseX = mouseX - colRect.left;
-      const centerCol = colRect.width / 2;
-
-      // Притяжение к курсору
-      const pull = (relMouseX - centerCol) * 0.04;
-      const spring = (centerCol + pull - cardX) * 0.05;
-      cardVX += spring;
-      cardVX *= 0.85;
-      cardX += cardVX;
-
-      // Ограничение качания
-      const maxSwing = 60;
-      cardX = Math.max(centerCol - maxSwing, Math.min(centerCol + maxSwing, cardX));
-
-      // Сдвигаем карточку
-      const offset = cardX - centerCol;
-      card.style.transform = `translateX(${offset}px) rotate(${offset * 0.08}deg)`;
-
-      // Рисуем верёвку от верхней точки до верхнего центра карточки
-      drawRope(anchorX, anchorY, anchorX + offset, 70);
-
-      requestAnimationFrame(animate);
+    function getCardAngle() {
+      const tip = points[SEGMENTS];
+      const prev = points[SEGMENTS - 1];
+      return Math.atan2(tip.x - prev.x, -(tip.y - prev.y)) * 0.3;
     }
-    animate();
+
+    function loop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!dragging) updatePhysics();
+      else updatePhysics();
+
+      drawRope();
+      const tip = points[SEGMENTS];
+      const angle = getCardAngle();
+      drawCard(tip.x - CARD_W / 2, tip.y, angle);
+
+      requestAnimationFrame(loop);
+    }
+
+    // Загружаем фото
+    const img = new Image();
+    img.src = '../images/avatar.jpg';
+    img.onload = () => { window._avatar = img; };
+    window._avatar = img;
+
+    loop();
   </script>
 </body>
 </html>
