@@ -228,9 +228,9 @@
       for (let i = 0; i <= SEGMENTS; i++) {
         points.push({
           x: cx,
-          y: i * SEG_LEN,
+          y: i * SEG_LEN * 0.1,
           px: cx,
-          py: i * SEG_LEN,
+          py: i * SEG_LEN * 0.1 - 8,
           pinned: i === 0
         });
       }
@@ -478,7 +478,7 @@
     function getCardAngle() {
       const tip = points[SEGMENTS];
       const prev = points[SEGMENTS - 1];
-      return Math.atan2(tip.x - prev.x, -(tip.y - prev.y)) * 0.3;
+      return Math.atan2(tip.x - prev.x, -(tip.y - prev.y)) * 0.08;
     }
 
     function loop() {
