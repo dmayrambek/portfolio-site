@@ -204,18 +204,10 @@
 
   <footer><p>© 2025–2026 Automation</p></footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
     const canvas = document.getElementById('ropeCanvas');
     const ctx = canvas.getContext('2d');
-
-    // Размеры
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = 680;
-      initPoints();
-    }
-    resize();
-    window.addEventListener('resize', resize);
 
     // Физика верёвки — цепочка точек
     const SEGMENTS = 14;
@@ -225,6 +217,7 @@
     const CARD_H = 280;
 
     let points = [];
+
     function initPoints() {
       const cx = canvas.width / 2;
       points = [];
@@ -238,7 +231,15 @@
         });
       }
     }
-    initPoints();
+
+    // Размеры
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = 680;
+      initPoints();
+    }
+    resize();
+    window.addEventListener('resize', resize);
 
     // Мышь / touch
     let dragging = false;
