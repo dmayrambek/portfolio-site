@@ -5,23 +5,57 @@
   <title>Automation Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* контейнер для фона */
     #tsparticles {
       position: fixed;
       inset: 0;
       z-index: -1;
       pointer-events: none;
     }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .stat-card {
+      background: rgba(50, 65, 105, 0.9);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-4px); }
+    .stat-card .num {
+      font-size: 36px;
+      font-weight: bold;
+      color: #4da6ff;
+      display: block;
+    }
+    .stat-card .label {
+      font-size: 13px;
+      color: #a0b8d8;
+      margin-top: 4px;
+      display: block;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .badge-prod { background: rgba(0,200,100,0.2); color: #00c864; border: 1px solid #00c864; }
+    .badge-mvp  { background: rgba(255,180,0,0.15); color: #ffb400; border: 1px solid #ffb400; }
   </style>
 </head>
 <body>
-  <!-- Живой фон -->
   <div id="tsparticles"></div>
 
-  <!-- HERO HEADER -->
   <header class="hero">
     <h1>FlowMaster</h1>
-    <p>Jira • Telegram Bot • FastAPI • Reports</p>
+    <p>Jira • ScriptRunner • Groovy • Reports</p>
     <nav>
       <a href="pages/projects.html">Projects</a>
       <a href="pages/cases.html">Cases</a>
@@ -35,10 +69,38 @@
     <!-- INTRO -->
     <section class="intro">
       <h2>👋 Welcome, my friend</h2>
-      <p>I specialize in business process automation, Jira integrations, Telegram bots, and backend platforms.</p>
+      <p>Специализация — автоматизация бизнес-процессов, Jira integrations, ScriptRunner Jobs и автоматические отчёты.</p>
       <div class="buttons">
         <a href="pages/projects.html" class="btn">🚀 Projects</a>
+        <a href="pages/cases.html" class="btn">📋 Cases</a>
         <a href="pages/about.html" class="btn">ℹ️ About me</a>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section>
+      <h2>📈 В цифрах</h2>
+      <div class="stats">
+        <div class="stat-card">
+          <span class="num">5</span>
+          <span class="label">Jobs автоматизировано</span>
+        </div>
+        <div class="stat-card">
+          <span class="num">7</span>
+          <span class="label">Проектов в production</span>
+        </div>
+        <div class="stat-card">
+          <span class="num">3x</span>
+          <span class="label">Скорость обработки заявок</span>
+        </div>
+        <div class="stat-card">
+          <span class="num">40%</span>
+          <span class="label">Снижение ошибок</span>
+        </div>
+        <div class="stat-card">
+          <span class="num">80%</span>
+          <span class="label">Ускорение передачи данных</span>
+        </div>
       </div>
     </section>
 
@@ -47,18 +109,32 @@
       <div class="card">
         <h3>⚙️ Jira Automation</h3>
         <p>Workflow, Dynamic Forms, Groovy scripts, validators.</p>
+        <span class="badge badge-prod">Production</span>
       </div>
       <div class="card">
-        <h3>🤖 Telegram Bot</h3>
-        <p>Integration with Jira API, quick search, reports, authentication.</p>
+        <h3>⏰ ScriptRunner Jobs</h3>
+        <p>Автоматические отчёты, рассылки, обработка задач по расписанию.</p>
+        <span class="badge badge-prod">Production</span>
       </div>
       <div class="card">
-        <h3>💻 FastAPI</h3>
-        <p>Platform for API integrations and database operations.</p>
+        <h3>🤖 Groovy Scripts</h3>
+        <p>Автосоздание задач, валидации, копирование вложений, интеграции.</p>
+        <span class="badge badge-prod">Production</span>
       </div>
       <div class="card">
         <h3>📊 Reports</h3>
-        <p>Excel KPIs, pivot tables, automated distribution.</p>
+        <p>Excel KPIs, CSV-отчёты, автоматическая рассылка по расписанию.</p>
+        <span class="badge badge-prod">Production</span>
+      </div>
+      <div class="card">
+        <h3>🤖 Telegram Bot</h3>
+        <p>Jira API, поиск заявок, авторизация, рассылка отчётов.</p>
+        <span class="badge badge-mvp">MVP</span>
+      </div>
+      <div class="card">
+        <h3>💻 FastAPI</h3>
+        <p>Backend-платформа для интеграций, хранение данных, REST API.</p>
+        <span class="badge badge-mvp">MVP</span>
       </div>
     </section>
   </main>
@@ -67,7 +143,6 @@
     <p>© 2025 Backoffice Automation</p>
   </footer>
 
-  <!-- tsParticles -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <script>
     tsParticles.load("tsparticles", {
@@ -100,4 +175,3 @@
   </script>
 </body>
 </html>
-
